@@ -7,7 +7,7 @@ ui_print(" █▀█ █▀█ █▀█ ░░█ █▀▀ █▀▀
 ui_print(" █▀▀ █▀▄ █▄█ █▄█ ██▄ █▄▄ ░█░");
 ui_print("      ");
 ui_print("      ");
-ui_print("S22 port v0.2");
+ui_print("S22 port v0.5");
 ui_print("Alpha warning: Expect bugs without any reason.");
 #############################################################
 ifelse(is_mounted("/system_root"), unmount("/system_root"));
