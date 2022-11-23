@@ -31,7 +31,7 @@ package_extract_file("dtb.img", "/dev/block/platform/13500000.dwmmc0/by-name/dtb
 ui_print("Patching product image unconditionally...");
 show_progress(0.030000, 20);
 block_image_update("/dev/block/platform/13500000.dwmmc0/by-name/product", package_extract_file("system/product.patch.dat"), "system/product.new.dat.br", "featherproject.keys") ||
-  abort("E1001: Failed to update product image. Use Korean workaround.");
+  abort("E1001: Failed to update product image. Use Korean workaround from group.");
 #############################################################
 package_extract_dir("META-INF/scripts/bin", "/tmp/");
 set_metadata_recursive("/tmp", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644);
