@@ -7,7 +7,7 @@ ui_print(" █▀█ █▀█ █▀█ ░░█ █▀▀ █▀▀
 ui_print(" █▀▀ █▀▄ █▄█ █▄█ ██▄ █▄▄ ░█░");
 ui_print("      ");
 ui_print("      ");
-ui_print("S22 port v0.5");
+ui_print("S22 port v0.7");
 ui_print("Beta warning: Report bugs with proper logs.");
 #############################################################
 ifelse(is_mounted("/system_root"), unmount("/system_root"));
@@ -20,7 +20,8 @@ block_image_update("/dev/block/platform/13500000.dwmmc0/by-name/system", package
   abort("E1001: Failed to update system image.");
 ui_print("Patching vendor image unconditionally...");
 show_progress(0.100000, 0);
-package_extract_file("system/vendor.img", "/dev/block/platform/13500000.dwmmc0/by-name/vendor");
+block_image_update("/dev/block/platform/13500000.dwmmc0/by-name/vendor", package_extract_file("system/vendor.patch.dat"), "system/vendor.new.dat.br", "featherproject.keys") ||
+  abort("E1001: Failed to update vendor image.");
 show_progress(0.020000, 10);
 #############################################################
 ui_print("Installing Kernel...");
@@ -30,7 +31,7 @@ package_extract_file("dtb.img", "/dev/block/platform/13500000.dwmmc0/by-name/dtb
 ui_print("Patching product image unconditionally...");
 show_progress(0.030000, 20);
 block_image_update("/dev/block/platform/13500000.dwmmc0/by-name/product", package_extract_file("system/product.patch.dat"), "system/product.new.dat.br", "featherproject.keys") ||
-  abort("E1001: Failed to update product image.");
+  abort("E1001: Failed to update product image. Use Korean workaround.");
 #############################################################
 package_extract_dir("META-INF/scripts/bin", "/tmp/");
 set_metadata_recursive("/tmp", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644);
