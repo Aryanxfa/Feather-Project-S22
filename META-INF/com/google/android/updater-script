@@ -8,6 +8,7 @@ ui_print(" █▀▀ █▀▄ █▄█ █▄█ ██▄ █▄▄
 ui_print("      ");
 ui_print("      ");
 ui_print("S22 port v0.5");
+ui_print("Alpha warning: Expect bugs without any reason.");
 #############################################################
 ifelse(is_mounted("/system_root"), unmount("/system_root"));
 ifelse(is_mounted("/vendor"), unmount("/vendor"));
@@ -21,15 +22,10 @@ ui_print("Patching vendor image unconditionally...");
 show_progress(0.100000, 0);
 package_extract_file("system/vendor.img", "/dev/block/platform/13500000.dwmmc0/by-name/vendor");
 show_progress(0.020000, 10);
-show_progress(0.030000, 20);
-ui_print("Installing Kernel...");
-package_extract_file("boot.img", "/dev/block/platform/13500000.dwmmc0/by-name/boot");
-package_extract_file("dtbo.img", "/dev/block/platform/13500000.dwmmc0/by-name/dtbo");
-package_extract_file("dtb.img", "/dev/block/platform/13500000.dwmmc0/by-name/dtb");
 ui_print("Patching product image unconditionally...");
+show_progress(0.030000, 20);
 block_image_update("/dev/block/platform/13500000.dwmmc0/by-name/product", package_extract_file("system/product.patch.dat"), "system/product.new.dat.br", "featherproject.keys") ||
-block_image_update("/dev/block/platform/13500000.dwmmc0/by-name/product", package_extract_file("system/productlite.patch.dat"), "system/productlite.new.dat.br", "featherproject.keys") ||
-  abort("E1001: Failed to update product image.");;
+  abort("E1001: Failed to update product image.");
 #############################################################
 package_extract_dir("META-INF/scripts/bin", "/tmp/");
 set_metadata_recursive("/tmp", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644);
@@ -44,5 +40,9 @@ ifelse(is_mounted("/system_root"), unmount("/system_root"));
 ifelse(is_mounted("/vendor"), unmount("/vendor"));
 ifelse(is_mounted("/product"), unmount("/product"));
 #############################################################
+ui_print("Installing Kernel...");
+package_extract_file("boot.img", "/dev/block/platform/13500000.dwmmc0/by-name/boot");
+package_extract_file("dtbo.img", "/dev/block/platform/13500000.dwmmc0/by-name/dtbo");
+package_extract_file("dtb.img", "/dev/block/platform/13500000.dwmmc0/by-name/dtb");
 ui_print(" ... ");
 set_progress(1.000000);
