@@ -7,8 +7,8 @@ ui_print(" █▀█ █▀█ █▀█ ░░█ █▀▀ █▀▀
 ui_print(" █▀▀ █▀▄ █▄█ █▄█ ██▄ █▄▄ ░█░");
 ui_print("      ");
 ui_print("      ");
-ui_print("S22 port v0.7");
-ui_print("Beta warning: Report bugs with proper logs.");
+ui_print("S22 port v1.0");
+ui_print("      ");
 #############################################################
 ifelse(is_mounted("/system_root"), unmount("/system_root"));
 ifelse(is_mounted("/vendor"), unmount("/vendor"));
